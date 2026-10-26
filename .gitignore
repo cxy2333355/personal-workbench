@@ -1,0 +1,6 @@
+# WorkBuddy 内部追踪文件 / 系统文件
+.workbuddy/
+*.genie
+.DS_Store
+Thumbs.db
+node_modules/
