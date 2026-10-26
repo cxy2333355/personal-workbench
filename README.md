@@ -19,7 +19,7 @@
 python3 -m http.server 8000
 # 浏览器打开 http://localhost:8000
 ```
-
+https://personal-workbench-24832.app.workbuddy.host/?sharecode=KMYAYVKCJR&shareId=965f608f734c404493300a11730627d6
 ## 部署
 
 可部署到任意静态托管平台（GitHub Pages / WorkBuddy Sites / Vercel / Netlify 等），无需任何后端。
