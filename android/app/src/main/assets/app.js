@@ -1,5 +1,5 @@
 /* ============================================================
-   Vital 风格个人工作台 · 本地优先、零依赖
+   DayDayUp 风格个人工作台 · 本地优先、零依赖
    收集(Inbox) → 执行(Todos) → 复盘(Reports) 闭环
    数据存 localStorage，可导出 JSON，归用户所有。
    ============================================================ */
@@ -7,7 +7,7 @@
   "use strict";
 
   // ---------- 常量 / 工具 ----------
-  const STORE_KEY = "vital-workbench-v1";
+  const STORE_KEY = "daydayup-workbench-v1";
   const $ = (sel, root = document) => root.querySelector(sel);
   const uid = () => Math.random().toString(36).slice(2, 10) + Date.now().toString(36).slice(-4);
   const pad = (n) => String(n).padStart(2, "0");
@@ -102,7 +102,7 @@
         { id: uid(), name: "阅读清单", headline: "", createdAt: t },
       ],
       tasks: [
-        { id: uid(), title: "参考 Vital 搭好自己的工作台", threadId: null, status: "open", priority: "high", due: t, createdAt: t, completedAt: null, deferredCount: 0, agentDelegable: false, notes: "" },
+        { id: uid(), title: "参考 DayDayUp 搭好自己的工作台", threadId: null, status: "open", priority: "high", due: t, createdAt: t, completedAt: null, deferredCount: 0, agentDelegable: false, notes: "" },
         { id: uid(), title: "读完《Calm Productivity》那篇设计文档", threadId: null, status: "open", priority: "med", due: addDays(t, 2), createdAt: t, completedAt: null, deferredCount: 0, agentDelegable: false, notes: "" },
         { id: uid(), title: "晚上散步 30 分钟", threadId: null, status: "open", priority: "none", due: null, createdAt: t, completedAt: null, deferredCount: 0, agentDelegable: false, notes: "" },
       ],
@@ -144,7 +144,12 @@
 
   function load() {
     try {
-      const raw = localStorage.getItem(STORE_KEY);
+      let raw = localStorage.getItem(STORE_KEY);
+      if (!raw) {
+        // 兼容旧版本（vital-workbench-v1）数据，避免升级后数据丢失
+        const legacy = localStorage.getItem("vital-workbench-v1");
+        if (legacy) { raw = legacy; try { localStorage.removeItem("vital-workbench-v1"); } catch (e) {} }
+      }
       if (!raw) return defaultState();
       const s = JSON.parse(raw);
       if (!s || s.version !== 1) return defaultState();
@@ -1402,7 +1407,7 @@
     const blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-    a.download = `vital-workbench-${t}.json`;
+    a.download = `daydayup-workbench-${t}.json`;
     a.click(); URL.revokeObjectURL(a.href); toast("已导出");
   }
   function importData(file) {
@@ -1428,7 +1433,7 @@
   function exportICS() {
     const evs = state.health.monthEvents;
     const p2 = (n) => String(n).padStart(2, "0");
-    const lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Vital Workbench//CN", "CALSCALE:GREGORIAN"];
+    const lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//DayDayUp Workbench//CN", "CALSCALE:GREGORIAN"];
     Object.keys(evs).forEach((d) => {
       const [y, m, dd] = d.split("-").map(Number);
       evs[d].forEach((e) => {
@@ -1441,7 +1446,7 @@
           dtEnd = `${y}${p2(m)}${p2(dd)}T${p2(eh)}${p2(em)}00`;
         } else { dtStart = `${y}${p2(m)}${p2(dd)}`; dtEnd = dtStart; }
         lines.push("BEGIN:VEVENT");
-        lines.push("UID:" + e.id + "@vital");
+        lines.push("UID:" + e.id + "@daydayup");
         lines.push("DTSTART" + (hasTime ? ";TZID=Asia/Shanghai:" : ":") + dtStart);
         lines.push("DTEND" + (hasTime ? ";TZID=Asia/Shanghai:" : ":") + dtEnd);
         lines.push("SUMMARY:" + (e.content || "").replace(/[\n,;]/g, " "));
@@ -1450,7 +1455,7 @@
     });
     lines.push("END:VCALENDAR");
     const blob = new Blob([lines.join("\r\n")], { type: "text/calendar" });
-    const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "vital-calendar.ics"; a.click(); URL.revokeObjectURL(a.href);
+    const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "daydayup-calendar.ics"; a.click(); URL.revokeObjectURL(a.href);
     toast("已导出 .ics 日历");
   }
 
@@ -1539,7 +1544,7 @@
     renderLibrary();
     renderFocus();
     const n = badgeCount();
-    document.title = (n ? "(" + n + ") " : "") + "工作台 · Vital";
+    document.title = (n ? "(" + n + ") " : "") + "工作台 · DayDayUp";
   }
 
   // ---------- 启动 ----------
