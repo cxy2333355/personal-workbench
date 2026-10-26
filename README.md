@@ -1,6 +1,6 @@
 # 个人工作台 · Personal Workbench
 
-一个**本地优先（local-first）**的个人工作台。参考 [ximing/vital](https://github.com/ximing/vital)「翡翠园」设计语言，融合健康管理模块与若干移动端优点。纯静态、零依赖、零后端，数据全部保存在浏览器 `localStorage`。
+一个**本地优先（local-first）**的个人工作台。融合健康管理模块与若干移动端优点。纯静态、零依赖、零后端，数据全部保存在浏览器 `localStorage`。
 
 ## 功能模块
 
@@ -27,3 +27,4 @@ python3 -m http.server 8000
 ## 数据说明
 
 所有数据保存在浏览器 `localStorage`，**仅存于本机，不上传任何服务器**。换设备 / 清缓存会丢失数据，请注意备份。
+参考 [ximing/vital](https://github.com/ximing/vital)
