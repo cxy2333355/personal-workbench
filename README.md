@@ -53,10 +53,26 @@ python3 -m http.server 8000
 
 > 提示：iPad / iPhone 同理，Safari 中点击「分享」→「添加到主屏幕」。
 
+## 打包成安卓 APK（生成 .apk 安装包）
+
+本仓库是网页源码，要变成可安装的 `.apk`，需要用 Android Studio 把网页「套」进一个原生 WebView 壳里。仓库已备好现成的 **Android 工程**（`android/` 目录，或 Releases 里的 `android-wrapper.zip`），照做即可：
+
+1. 安装 [Android Studio](https://developer.android.com/studio)（首次会下载 Android SDK，约 1 GB，需要联网）。
+2. 下载 Releases 里的 `android-wrapper.zip` 并解压；或 `git clone` 本仓库后进入 `android/` 目录。
+3. Android Studio → **Open** → 选择解压出的 `android` 文件夹，等待 Gradle 同步完成。
+4. 菜单 **Build → Build Bundle(s) / APK(s) → Build APK(s)**。
+5. 编译完成后，右下角提示里点 **locate**，即可得到 `app-debug.apk`。
+6. 把 `app-debug.apk` 拷到手机，允许「未知来源」安装即可使用。
+
+> 工程说明：`app/src/main/assets/` 里放的就是 `index.html` / `styles.css` / `app.js`，APP 启动后直接加载本地网页，无需联网也能用（仅「智能简报-调用模型」和在线功能需要网络）。想更新内容，替换这三个文件重新打包即可。正式发布到应用商店前，请在 `app/build.gradle` 里设置自己的 `applicationId` 并用 **Build → Generate Signed Bundle / APK** 生成签名包。
+
 ## 下载 / Downloads
 
 - **最新源码与 `app.js`**：见仓库右侧 **Releases**（发布）页面，每个版本都会附带 `app.js` 等文件供直接下载。
-- **在线试用**：https://cxy2333355.github.io/personal-workbench/
+- **安卓 APK 构建工程**：Releases 中提供 `android-wrapper.zip`，下载解压后用 Android Studio 打开即可一键打包成 `.apk`（详见下方「打包成安卓 APK」）。
+- **在线试用**：
+  - GitHub Pages：`https://cxy2333355.github.io/personal-workbench/`
+  - WorkBuddy 在线版：`https://personal-workbench-24832.app.workbuddy.host/?sharecode=KMYAYVKCJR&shareId=965f608f734c404493300a11730627d6`
 
 ## 部署（自行托管）
 
