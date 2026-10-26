@@ -1,6 +1,6 @@
 # 个人工作台 · Personal Workbench
 
-一个**本地优先（local-first）**的个人工作台。参考 [ximing/vital](https://github.com/ximing/vital)「翡翠园」设计语言，融合健康管理模块与若干移动端优点。纯静态、零依赖、零后端，数据全部保存在浏览器 `localStorage`。
+一个**本地优先（local-first）**的个人工作台。融合健康管理模块与若干移动端优点。纯静态、零依赖、零后端，数据全部保存在浏览器 `localStorage`。
 
 > 本程序是纯前端网页应用：一份 HTML + 一份 CSS + 一份 JS，无需安装任何运行时，任意现代浏览器双击即可运行，也能像 App 一样「添加到主屏幕」装在手机上。
 
