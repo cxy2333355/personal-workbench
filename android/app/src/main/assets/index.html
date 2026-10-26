@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>工作台 · Vital 风格个人 OS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="app" class="app">
+    <!-- Rail 工具书脊 -->
+    <nav class="rail" id="rail" aria-label="主导航"></nav>
+
+    <!-- Library 个人索引 -->
+    <aside class="library" id="library" aria-label="索引"></aside>
+
+    <!-- Focus Canvas 当前工作 -->
+    <main class="focus" id="focus" aria-label="工作区"></main>
+  </div>
+
+  <!-- 浮层挂载点 -->
+  <div id="overlay" class="overlay hidden" aria-hidden="true"></div>
+  <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+  <div id="lock" class="lock hidden" aria-hidden="true"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+// Top-level build file. Android Gradle Plugin version is declared in settings.gradle.
+plugins {
+    // 空：AGP 版本已在 settings.gradle 的 pluginManagement 中指定
+}
